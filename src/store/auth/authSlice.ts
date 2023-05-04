@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Status, iInitialState } from '../../types';
+import { Status, iInitialStateUser } from '../../types';
 
-const initialState: iInitialState = {
+const initialState: iInitialStateUser = {
   status: Status.Checking,
   uid: null,
   email: null,

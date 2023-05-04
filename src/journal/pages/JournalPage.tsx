@@ -1,17 +1,26 @@
-import { IconButton } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 
+import { IconButton } from '@mui/material';
 import JournalLayout from '../layout/JournalLayout';
-import NothingSelectedView from '../views/NothingSelectedView';
-import NoteView from '../views/NoteView';
 import { AddOutlined } from '@mui/icons-material';
+import NothingSelectedView from '../views/NothingSelectedView';
+import { startNewNote } from '../../store/journal';
+import NoteView from '../views/NoteView';
 
 const JournalPage = () => {
+  const dispatch = useAppDispatch();
+  const { isSaving, active } = useAppSelector((state) => state.journal);
+  const onClickNewNote = () => {
+    dispatch(startNewNote());
+  };
   return (
-    <JournalLayout >
+    <JournalLayout>
       <>
-        <NothingSelectedView />
-        {/* <NoteView /> */}
+        {active === null ? <NothingSelectedView /> : <NoteView />}
+
         <IconButton
+          disabled={isSaving}
+          onClick={onClickNewNote}
           size="large"
           sx={{
             color: 'white',
